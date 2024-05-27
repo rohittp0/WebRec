@@ -6,22 +6,23 @@
 
     <!-- Primary Meta Tags -->
     <title>WebRec</title>
-    <meta name="title" content="WebRec" />
-    <meta name="description" content="WebApp that captures your screen, running fully locally on your browser" />
+    <meta name="title" content="WebRec"/>
+    <meta name="description" content="WebApp that captures your screen, running fully locally on your browser"/>
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://rohittp.com/WebRec/" />
-    <meta property="og:title" content="WebRec" />
-    <meta property="og:description" content="WebApp that captures your screen, running fully locally on your browser" />
-    <meta property="og:image" content="https://rohittp.com/WebRec/favicon/android-chrome-512x512.png" />
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://rohittp.com/WebRec/"/>
+    <meta property="og:title" content="WebRec"/>
+    <meta property="og:description" content="WebApp that captures your screen, running fully locally on your browser"/>
+    <meta property="og:image" content="https://rohittp.com/WebRec/favicon/android-chrome-512x512.png"/>
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://rohittp.com/WebRec/" />
-    <meta property="twitter:title" content="WebRec" />
-    <meta property="twitter:description" content="WebApp that captures your screen, running fully locally on your browser" />
-    <meta property="twitter:image" content="https://rohittp.com/WebRec/favicon/android-chrome-512x512.png" />
+    <meta property="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:url" content="https://rohittp.com/WebRec/"/>
+    <meta property="twitter:title" content="WebRec"/>
+    <meta property="twitter:description"
+          content="WebApp that captures your screen, running fully locally on your browser"/>
+    <meta property="twitter:image" content="https://rohittp.com/WebRec/favicon/android-chrome-512x512.png"/>
 
     <!-- Meta Tags Generated with https://metatags.io -->
 
@@ -32,15 +33,36 @@
     <link rel="manifest" href="site.webmanifest">
 
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            padding: 8px 0 0 8px;
+        }
+
         .centering {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: calc(100vh - 38px);
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .logo img {
+            border-radius: 50%;
+            outline: #b6cde0 4px solid;
         }
 
         button {
@@ -91,16 +113,20 @@
     </style>
 </head>
 <body>
-<div>
+<div class="header">
     <a href="https://github.com/rohittp0/WebRec" target="_blank" class="github">
         <img src="github.webp" alt="GitHub" width="30">
         Code on GitHub
     </a>
 </div>
 <div class="centering">
-    <h3>WebRec</h3>
+    <div class="logo">
+        <img src="logo.webp" alt="GitHub" width="64">
+        <h1>WebRec</h1>
+    </div>
     <div id="description">
-        Fully local screen recording in the browser. Just hit the "Start Recording" button and download the recording when you're done.
+        Fully local screen recording in the browser. Just hit the "Start Recording" button and download the recording
+        when you're done.
     </div>
     <button id="startBtn">Start Recording</button>
     <button id="stopBtn" style="display: none;">Stop Recording</button>
