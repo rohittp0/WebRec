@@ -32,96 +32,20 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
     <link rel="manifest" href="site.webmanifest">
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
+    <link rel="stylesheet" href="css/index.css">
 
-        .header {
-            padding: 8px 0 0 8px;
-        }
-
-        .centering {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: calc(100vh - 38px);
-            margin: 0;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .logo img {
-            border-radius: 50%;
-            outline: #b6cde0 4px solid;
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #startBtn {
-            background-color: #28a745;
-            color: white;
-        }
-
-        #stopBtn {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        button:hover {
-            opacity: 0.8;
-        }
-
-        #timer {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-
-        #description {
-            max-width: 600px;
-            margin-bottom: 20px;
-            font-size: 16px;
-            text-align: start;
-        }
-
-        .github {
-            font-family: sans-serif;
-            font-size: 18px;
-            gap: 0.5rem;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: black;
-        }
-    </style>
+    <script src="js/index.js" defer></script>
 </head>
 <body>
 <div class="header">
     <a href="https://github.com/rohittp0/WebRec" target="_blank" class="github">
-        <img src="github.webp" alt="GitHub" width="30">
+        <img src="img/github.webp" alt="GitHub" width="30">
         Code on GitHub
     </a>
 </div>
 <div class="centering">
     <div class="logo">
-        <img src="logo.webp" alt="GitHub" width="64">
+        <img src="img/logo.webp" alt="GitHub" width="64">
         <h1>WebRec</h1>
     </div>
     <div id="description">
@@ -132,57 +56,5 @@
     <button id="stopBtn" style="display: none;">Stop Recording</button>
     <div id="timer">Recording Time: 00:00</div>
 </div>
-<script>
-  let mediaRecorder;
-  let recordedChunks = [];
-  let startTime;
-  let timerInterval;
-
-  document.getElementById('startBtn').addEventListener('click', async () => {
-    const stream = await navigator.mediaDevices.getDisplayMedia({video: true});
-    mediaRecorder = new MediaRecorder(stream, {mimeType: 'video/webm'});
-
-    mediaRecorder.ondataavailable = event => {
-      if (event.data.size > 0) {
-        recordedChunks.push(event.data);
-      }
-    };
-
-    mediaRecorder.onstop = () => {
-      mediaRecorder.stream.getVideoTracks().forEach(track => track.stop());
-      clearInterval(timerInterval);
-
-      const blob = new Blob(recordedChunks, {type: 'video/webm'});
-      const url = URL.createObjectURL(blob);
-      const downloadLink = document.createElement('a');
-
-      downloadLink.href = url;
-      downloadLink.download = 'recording.webm';
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      downloadLink.remove();
-    };
-
-    mediaRecorder.start();
-    startTime = Date.now();
-    timerInterval = setInterval(updateTimer, 1000);
-
-    document.getElementById('startBtn').style.display = 'none';
-    document.getElementById('stopBtn').style.display = 'block';
-  });
-
-  document.getElementById('stopBtn').addEventListener('click', () => {
-    mediaRecorder.stop();
-    document.getElementById('startBtn').style.display = 'block';
-    document.getElementById('stopBtn').style.display = 'none';
-  });
-
-  function updateTimer() {
-    const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-    const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, '0');
-    const seconds = String(elapsedTime % 60).padStart(2, '0');
-    document.getElementById('timer').textContent = `Recording Time: ${minutes}:${seconds}`;
-  }
-</script>
 </body>
 </html>
