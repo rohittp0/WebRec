@@ -21,8 +21,10 @@ document.getElementById('startBtn').addEventListener('click', async () => {
     const url = URL.createObjectURL(blob);
     const downloadLink = document.createElement('a');
 
+    const timestamp = new Date().toLocaleDateString();
+
     downloadLink.href = url;
-    downloadLink.download = 'recording.webm';
+    downloadLink.download = `recording-${timestamp}.webm`
     document.body.appendChild(downloadLink);
     downloadLink.click();
     downloadLink.remove();
